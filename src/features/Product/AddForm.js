@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Fragment } from "react";
 const { useState } = React;
 function AddForm({ addProduct }) {
   const [name, setName] = useState("");
@@ -13,7 +14,7 @@ function submit(e){
   
 
   return (
-    <div>
+    <>
   <h1>Add Product</h1>
   <form id="create-form" onSubmit={submit} >
     <div className="input-group">
@@ -33,7 +34,7 @@ function submit(e){
 
     <button type="submit">Add product</button>
   </form>
-</div>
+</>
 )}
 
 
