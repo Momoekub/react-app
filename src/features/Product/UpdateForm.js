@@ -8,15 +8,13 @@ function UpdateForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
- const products = useSelector((state) => state.products);
-  const product = products.find((product) => product.id === id);
+  const products = useSelector((state) => state.products);
+  const product = products.find((p) => p.id.toString() === id);
  
  
   const [name, setName] = useState(product.name);
   const [imageURL, setImageURL] = useState(product.imageURL);
   const [type, setType] = useState(product.type);
-
-  
 
   function handleUpdate(e) {
   e.preventDefault();
