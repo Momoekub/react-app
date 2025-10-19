@@ -10,11 +10,23 @@ function UpdateForm() {
 
   const products = useSelector((state) => state.products);
   const product = products.find((p) => p.id.toString() === id);
- 
- 
-  const [name, setName] = useState(product.name);
-  const [imageURL, setImageURL] = useState(product.imageURL);
-  const [type, setType] = useState(product.type);
+  
+  const [name, setName] = useState(""); 
+  const [imageURL, setImageURL] = useState("");
+  const [type, setType] = useState("");
+  
+  useEffect(() => {
+    if (product) {
+      setName(product.name);
+      setImageURL(product.imageURL);
+      setType(product.type);
+    }
+  }, [product]); 
+
+  if (!product) {
+    return <div>Loading product...</div>;
+  }
+  
 
   function handleUpdate(e) {
   e.preventDefault();
