@@ -1,49 +1,32 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React from "react";
 import Product from "../features/Product";
-import AddForm from "../features/Product/AddForm";
-const data = require("../app/data");
+import styled from "styled-components";
+import PropTypes from "prop-types";
 
-
-function Home() {
-  const [products, setProducts] = useState(data);
-  let currentProductId = 9;
-
-  async function getProducts() {
-    try {
-      const res = await axios.get(
-        "https://68e9fc47f1eeb3f856e5a63c.mockapi.io/products"
-      );
-      setProducts(res.data);
-    } catch (err) {
-      console.error("Error fetching:", err);
-    }
-  }
-
-
-
-  function addProduct(product) {
-    const newProduct = { id: ++currentProductId, ...product };
-    setProducts([...products, newProduct]);
-  }
-
+function Home({ className, products }) {
   return (
-    <>
+    <div className={className}>
       <h1>New Products</h1>
-
-      {products.length > 0 ? (
-        <ul className="Home__products">
-          {products.map((item) => (
-            <Product key={item.id} item={item} />
-          ))}
-        </ul>
-      ) : (
-        <div>Loading products....</div>
-      )}
-
-      <AddForm addProduct={addProduct} />
-    </>
+      <ul className="Home__products">
+        {products.map((product) => (
+          <Product key={product.id} item={product} />
+        ))}
+      </ul>
+    </div>
   );
 }
 
-export default Home;
+Home.propTypes = {
+  className: PropTypes.string,
+  products: PropTypes.array,
+};
+
+export default styled(Home)`
+  .Home__products {
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding: 0;
+    margin: 0 -12px;
+  }
+`;

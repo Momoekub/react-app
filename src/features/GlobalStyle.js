@@ -1,4 +1,7 @@
-body {
+import { createGlobalStyle } from 'styled-components';
+
+const GlobalStyle = createGlobalStyle`
+   body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -136,3 +139,6 @@ form button {
 form .input-group {
   margin-bottom: 1.5rem;
 }
+  `;
+
+export default GlobalStyle;

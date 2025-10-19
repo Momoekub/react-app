@@ -1,22 +1,31 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Fragment } from "react";
-const { useState } = React;
-function AddForm({ addProduct }) {
-  const [name, setName] = useState("");
-  const [imageURL, setImageURL] = useState("");
-  const [type, setType] = useState("");
+import { useDispatch } from 'react-redux';
+import { addProduct } from './actions';
+import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
 
-function submit(e){
-    e.preventDefault();
-    addProduct({name, imageURL, type});
-}
+
+
+function AddForm() {
+ const [name, setName] = useState('');
+  const [imageURL, setImageURL] = useState('');
+  const [type, setType] = useState('');
+
   
+const dispatch = useDispatch();
+const navigate = useNavigate();
+
+function onSubmit(e) {
+  e.preventDefault();
+  dispatch(addProduct({ name, type, imageURL }));
+  navigate('/');
+}
 
   return (
     <>
   <h1>Add Product</h1>
-  <form id="create-form" onSubmit={submit} >
+  <form id="create-form" onSubmit={onSubmit } >
     <div className="input-group">
       <label htmlFor="name" >Name</label>
       <input name="name" type="text" id="name" value={name} onChange={(e) => setName(e.target.value)}/>
@@ -37,9 +46,5 @@ function submit(e){
 </>
 )}
 
-
-AddForm.propTypes = {
-  addProduct: PropTypes.func.isRequired,
-}
 
 export default AddForm;
